@@ -3,16 +3,16 @@
 
 #include <string>
 
-
+template <typename SensorTemplate>
 class Sensor
 {
 private:
     std::string name;
-    std::string value;
+    SensorTemplate value;
 public:
     Sensor();
     Sensor(const Sensor &other);
-    Sensor(std::string name, std::string value);
+    Sensor(std::string name, SensorTemplate value);
     Sensor &operator=(const Sensor &other);
     ~Sensor();
     std::string getName();

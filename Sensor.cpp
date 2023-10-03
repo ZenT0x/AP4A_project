@@ -3,39 +3,46 @@
 
 
 // Default constructor
-Sensor::Sensor() {
+template <typename SensorTemplate>
+Sensor<SensorTemplate>::Sensor() {
     std::cout << "Sensor "+this->name+" created" << std::endl;
 }
 
 // Copy constructor
-Sensor::Sensor(const Sensor &other) {
-    std::cout << "Sensor "+this->name+" has been copied to Sensor "+other.name << std::endl;
+template <typename SensorTemplate>
+Sensor<SensorTemplate>::Sensor(const Sensor &other) : name(other.name), value(other.value) {
+    std::cout << "Sensor " << name << " has been copied to Sensor " << other.name << std::endl;
 }
 
 // Setter constructor
-Sensor::Sensor(std::string name, std::string value) {
-    this->name = name;
-    this->value = value;
-    std::cout << "Sensor "+this->name+" created" << std::endl;
+template <typename SensorTemplate>
+Sensor<SensorTemplate>::Sensor(std::string name, SensorTemplate value) : name(name), value(value) {
+    std::cout << "Sensor " << name << " created" << std::endl;
 }
     
 // Copy assignment operator
-Sensor& Sensor::operator=(const Sensor &other) {
-    std::cout << "Sensor "+this->name+" has been assigned to Sensor "+other.name << std::endl;
-    this->name = other.name;
-    this->value = other.value;
+template <typename SensorTemplate>
+Sensor<SensorTemplate> &Sensor<SensorTemplate>::operator=(const Sensor &other) {
+    std::cout << "Sensor " << name << " has been assigned to Sensor " << other.name << std::endl;
+    if (this != &other) {
+        name = other.name;
+        value = other.value;
+    }
     return *this;
 }
 
 // Destructor
-Sensor::~Sensor() {
+template <typename SensorTemplate>
+Sensor<SensorTemplate>::~Sensor() {
     std::cout << "Sensor "+this->name+" destroyed" << std::endl;
 }
 
 // Getters
-std::string Sensor::getName() {
+template <typename SensorTemplate>
+std::string Sensor<SensorTemplate>::getName() {
     return name;
 }
-std::string Sensor::getValue() {
+template <typename SensorTemplate>
+std::string Sensor<SensorTemplate>::getValue() {
     return value;
 }
