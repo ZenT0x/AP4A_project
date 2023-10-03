@@ -1,0 +1,1 @@
+g++ -o main main.cpp Sensor.cpp Server.cpp | ./main
