@@ -8,8 +8,7 @@ int main()
     Sensor sensor1("Temperature", "25");
     Sensor sensor2("Temperature", "26");
 
-    server << sensor1;
-    server << sensor2;
+    server << sensor1 << sensor2;
     return 0;
 }
 
