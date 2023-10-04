@@ -25,7 +25,7 @@ public:
 // Default constructor
 template <typename SensorTemplate>
 Server<SensorTemplate>::Server() {
-    std::cout << "Server created" << std::endl;
+    std::cout << "Server " << typeid(*this).name() << " created" << std::endl;
 }
 
 // Copy constructor
