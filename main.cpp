@@ -3,23 +3,20 @@
 #include "Sensor.hpp"
 
 int main()
-{
-    Server<int> serverInt;
-    Server<double> serverDouble;
-    Server<std::string> serverString;
-    Server<bool> serverBool;
+{   
+    Server<std::string> stringServer;
+    Server<int> intServer;
+    Server<float> floatServer;
 
+    Sensor<std::string> stringSensor("stringSensor", "Hello World!");
+    Sensor<int> Temperature("Temperature", 25);
+    Sensor<float> Pressure("Pressure", 1.2);
+    Sensor<float> Humidity("Humidity", 0.5);
 
-    Sensor<int> sensorInt("Temperature", 25);
-    Sensor<double> sensorDouble("Humidity", 0.5);
-    Sensor<std::string> sensorString("Pressure", "Normal");
-    Sensor<bool> sensorBool("Motion", true);
-
-    serverInt << sensorInt;
-    serverDouble << sensorDouble;
-    serverString << sensorString;
-    serverBool << sensorBool;
-    
+    stringServer << stringSensor;
+    intServer << Temperature;
+    floatServer << Pressure;
+    floatServer << Humidity;
 
     return 0;
 }
