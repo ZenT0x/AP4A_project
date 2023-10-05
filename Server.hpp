@@ -25,7 +25,7 @@ public:
 // Default constructor
 template <typename SensorTemplate>
 Server<SensorTemplate>::Server() {
-    std::cout << "Server " << typeid(*this).name() << " created" << std::endl;
+    std::cout << "Server created" << std::endl;
 }
 
 // Copy constructor
@@ -69,10 +69,10 @@ void Server<SensorTemplate>::consoleWrite(std::string message) {
 template <typename SensorTemplate>
 void Server<SensorTemplate>::fileWrite(std::string name, SensorTemplate value) {
     std::ofstream file;
-    file.open("data.txt", std::ios::app);
+    file.open(name+".txt", std::ios::app);
     if (file.is_open()) {
         std::ostream& out = file;
-        out << name << " : " << value << std::endl;
+        out << value << std::endl;
         file.close();
     }
 }
