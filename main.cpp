@@ -1,22 +1,15 @@
 #include <iostream>
-#include "Server.hpp"
-#include "Sensor.hpp"
+#include "Scheduler.hpp"
 
 int main()
-{   
-    Server<std::string> stringServer;
-    Server<int> intServer;
-    Server<float> floatServer;
+{
+    std::cout << "Program started" << std::endl;
+    std::cout << std::endl;
 
-    Sensor<std::string> stringSensor("stringSensor", "Hello World!");
-    Sensor<int> Temperature("Temperature", 25);
-    Sensor<float> Pressure("Pressure", 1.2);
-    Sensor<float> Humidity("Humidity", 0.5);
+    Scheduler scheduler;   
 
-    stringServer << stringSensor;
-    intServer << Temperature;
-    floatServer << Pressure;
-    floatServer << Humidity;
+    std::cout << std::endl;
+    std::cout << "Program ended" << std::endl;
 
     return 0;
 }
