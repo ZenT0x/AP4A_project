@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 template <typename SensorTemplate>
 class Sensor
@@ -20,6 +21,7 @@ public:
     ~Sensor();
     std::string getName() const;
     SensorTemplate getValue() const;
+    SensorTemplate aleaGenVal();
 };
 
 // Initialize static variable

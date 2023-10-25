@@ -7,6 +7,7 @@
 Scheduler::Scheduler()
 {
     std::cout << "[Scheduler] Scheduler created" << std::endl;
+    
     Server<std::string> stringServer;
     Server<int> intServer;
     Server<float> floatServer(true,true);
