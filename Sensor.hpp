@@ -81,4 +81,35 @@ SensorTemplate Sensor<SensorTemplate>::getValue() const
     return value;
 }
 
+// Generate random value based on sensor type
+template <typename SensorTemplate>
+SensorTemplate Sensor<SensorTemplate>::aleaGenVal()
+{
+    if (std::is_same<SensorTemplate, int>::value)
+    {
+        value = rand() % 100;
+        
+    }
+    else if (std::is_same<SensorTemplate, float>::value)
+    {
+        value = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+    }
+    else if (std::is_same<SensorTemplate, double>::value)
+    {
+        value = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
+    }
+    else if (std::is_same<SensorTemplate, bool>::value)
+    {
+        value = rand() % 2;
+    }
+    else     
+    {
+        // Unsupported sensor type
+        throw std::invalid_argument("Unsupported sensor type");
+    }
+    std::cout << "[Sensor] " << name << " value is " << value << std::endl;
+    return value;
+}
+
+
 #endif

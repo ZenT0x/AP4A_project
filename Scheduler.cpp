@@ -29,5 +29,11 @@ Scheduler::Scheduler()
     floatServer << Humidity;
 
     std::cout << std::endl;
+
+    Temperature.aleaGenVal();
+    Pressure.aleaGenVal();
+    Humidity.aleaGenVal();
+
+    std::cout << std::endl;
 }
 
