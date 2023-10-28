@@ -161,7 +161,7 @@ class SensorDouble : public Sensor<double>
 };
 
 class SensorBool : public Sensor<bool>
-{
+{   
     public:
         SensorBool() : Sensor<bool>() {}
         SensorBool(const SensorBool &other) : Sensor<bool>(other) {}
