@@ -1,16 +1,33 @@
 #include <iostream>
 #include "Scheduler.hpp"
 
-int main()
+using namespace std;
+
+int main(int argc, char *argv[])
 {
-    std::cout << "Program started" << std::endl;
-    std::cout << std::endl;
+    bool MainLog = false;
+    bool ServerLog = false;
+    bool SensorLog = false;
+    
+    srand(time(NULL));
 
-    Scheduler scheduler;   
-
-    std::cout << std::endl;
-    std::cout << "Program ended" << std::endl;
-
+    if (argc > 1)
+    {   
+        if (string(argv[1]) == "1")
+        {
+            MainLog = true;
+        }
+        if (string(argv[2]) == "1")
+        {
+            ServerLog = true;
+        }
+        if (string(argv[3]) == "1")
+        {
+           SensorLog = true;
+        }
+        
+    }
+    Scheduler scheduler(MainLog, SensorLog, ServerLog);
     return 0;
 }
 
