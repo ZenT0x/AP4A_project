@@ -6,24 +6,25 @@
 #include <sstream>
 #include "Sensor.hpp"
 
+using namespace std;
+
 template <typename SensorTemplate>
 class Server
 {
 private:
     static int serverCount;
-    bool consolActivation;
-    bool logActivation;
-    std::string name;
+    bool serverLog;
+    string name;
 
 public:
     Server();
     Server(const Server &other);
-    Server(bool boolConsolActivation, bool boolLogActivation);
+    Server(bool boolserverLog);
     Server &operator=(const Server &other);
     Server &operator<<(const Sensor<SensorTemplate> &other);
     ~Server();
-    void consoleWrite(std::string message);
-    void fileWrite(std::string sensorName, SensorTemplate sensorValue);
+    void consoleWrite(string message);
+    void fileWrite(string sensorName, SensorTemplate sensorValue);
 };
 
 // Initialize static variable
@@ -33,43 +34,47 @@ int Server<SensorTemplate>::serverCount = 0;
 // Default constructor
 template <typename SensorTemplate>
 Server<SensorTemplate>::Server()
-{   
+{
     serverCount++;
-    consolActivation = false;
-    logActivation = false;
-    name = "Server" + std::to_string(serverCount);
-    std::cout << "[Server] " + this->name + " created. Console : "+ std::to_string(consolActivation) + " Log : " + std::to_string(logActivation) << std::endl;
+    serverLog = false;
+    name = "Server" + to_string(serverCount);
 }
 
 // Copy constructor
 template <typename SensorTemplate>
 Server<SensorTemplate>::Server(const Server &other)
-{   
+{
     serverCount++;
-    consolActivation = other.consolActivation;
-    logActivation = other.logActivation;
-    name = "Server" + std::to_string(serverCount);
-    std::cout << "[Server] " << name << " has been copied to Server " << other.name << std::endl;
+    serverLog = other.serverLog;
+    name = "Server" + to_string(serverCount);
+    if (serverLog)
+    {
+        cout << "[Server] " << name << " has been copied to Server " << other.name << endl;
+    }
 }
 
 // Setter constructor
 template <typename SensorTemplate>
-Server<SensorTemplate>::Server(bool boolConsolActivation, bool boolLogActivation)
-{   
+Server<SensorTemplate>::Server(bool boolserverLog)
+{
     serverCount++;
-    consolActivation = boolConsolActivation;
-    logActivation = boolLogActivation;
-    name = "Server" + std::to_string(serverCount);
-    std::cout << "[Server] " << name << " created. Console : "+ std::to_string(consolActivation) + " Log : " + std::to_string(logActivation) << std::endl;
+    serverLog = boolserverLog;
+    name = "Server" + to_string(serverCount);
+    if (serverLog)
+    {
+        cout << "[Server] " << name << " created. Log : " + to_string(serverLog) << endl;
+    }
 }
 
 // Copy assignment operator
 template <typename SensorTemplate>
 Server<SensorTemplate> &Server<SensorTemplate>::operator=(const Server &other)
 {
-    consolActivation = other.consolActivation;
-    logActivation = other.logActivation;
-    std::cout << "[Server] " << name << " has been assigned to Server " << other.name << std::endl;
+    serverLog = other.serverLog;
+    if (other.serverLog)
+    {
+        cout << "[Server] " << name << " has been assigned to Server " << other.name << endl;
+    }
     return *this;
 }
 
@@ -77,10 +82,13 @@ Server<SensorTemplate> &Server<SensorTemplate>::operator=(const Server &other)
 template <typename SensorTemplate>
 Server<SensorTemplate> &Server<SensorTemplate>::operator<<(const Sensor<SensorTemplate> &other)
 {
-    std::cout << "[Server] " << name << " received " << other.getName() << " : " << other.getValue() << std::endl;
-    std::stringstream ss;
+    if (serverLog)
+    {
+        cout << "[Server] " << name << " received " << other.getName() << " : " << other.getValue() << endl;
+    }
+    stringstream ss;
     ss << other.getValue();
-    std::string value = ss.str();
+    string value = ss.str();
     consoleWrite(other.getName() + " : " + value);
     fileWrite(other.getName(), other.getValue());
     return *this;
@@ -90,34 +98,71 @@ Server<SensorTemplate> &Server<SensorTemplate>::operator<<(const Sensor<SensorTe
 template <typename SensorTemplate>
 Server<SensorTemplate>::~Server()
 {
-    std::cout << "[Server] " + this->name + " destroyed" << std::endl;
+    if (serverLog)
+    {
+        cout << "[Server] " + this->name + " destroyed" << endl;
+    }
 }
 
 // Write to console
 template <typename SensorTemplate>
-void Server<SensorTemplate>::consoleWrite(std::string message)
+void Server<SensorTemplate>::consoleWrite(string message)
 {
-    if (consolActivation)
+    if (serverLog)
     {
-        std::cout << "[Log] " << message << std::endl;
+        cout << "[Log] " << message << endl;
     }
 }
 
 // Write to file
 template <typename SensorTemplate>
-void Server<SensorTemplate>::fileWrite(std::string name, SensorTemplate value)
+void Server<SensorTemplate>::fileWrite(string name, SensorTemplate value)
 {
-    if (logActivation)
+    if (serverLog)
     {
-        std::ofstream file;
-        file.open(name + ".txt", std::ios::app);
+        ofstream file;
+        file.open(name + ".txt", ios::app);
         if (file.is_open())
         {
-            std::ostream &out = file;
-            out << value << std::endl;
+            ostream &out = file;
+            out << value << endl;
             file.close();
         }
     }
 }
+
+class ServerInt : public Server<int>
+{
+    public:
+        ServerInt() : Server<int>() {}
+        ServerInt(const ServerInt &other) : Server<int>(other) {}
+        ServerInt(bool boolserverLog) : Server<int>(boolserverLog) {}
+};
+
+class ServerFloat : public Server<float>
+{
+    public:
+        ServerFloat() : Server<float>() {}
+        ServerFloat(const ServerFloat &other) : Server<float>(other) {}
+        ServerFloat(bool boolserverLog) : Server<float>(boolserverLog) {}
+};
+
+class ServerDouble : public Server<double>
+{
+    public:
+        ServerDouble() : Server<double>() {}
+        ServerDouble(const ServerDouble &other) : Server<double>(other) {}
+        ServerDouble(bool boolserverLog) : Server<double>(boolserverLog) {}
+};
+
+class ServerBool : public Server<bool>
+{
+    public:
+        ServerBool() : Server<bool>() {}
+        ServerBool(const ServerBool &other) : Server<bool>(other) {}
+        ServerBool(bool boolserverLog) : Server<bool>(boolserverLog) {}
+};
+
+
 
 #endif
