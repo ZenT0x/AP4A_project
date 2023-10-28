@@ -4,22 +4,25 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <random>
 
+using namespace std;
 template <typename SensorTemplate>
 class Sensor
 {
 private:
     static int sensorCount;
-    std::string name;
+    string name;
+    bool sensorLog;
     SensorTemplate value;
 
 public:
     Sensor();
     Sensor(const Sensor &other);
-    Sensor(std::string name, SensorTemplate value);
+    Sensor(string name, SensorTemplate value, bool boolSensorLog);
     Sensor &operator=(const Sensor &other);
     ~Sensor();
-    std::string getName() const;
+    string getName() const;
     SensorTemplate getValue() const;
     SensorTemplate aleaGenVal();
 };
@@ -30,30 +33,39 @@ int Sensor<SensorTemplate>::sensorCount = 0;
 
 // Default constructor
 template <typename SensorTemplate>
-Sensor<SensorTemplate>::Sensor()
+Sensor<SensorTemplate>::Sensor() : name("Sensor" + to_string(sensorCount)), sensorLog(false), value(0)
 {
-    std::cout << "[Sensor] " + this->name + " created" << std::endl;
+    sensorCount++;   
 }
+
 
 // Copy constructor
 template <typename SensorTemplate>
-Sensor<SensorTemplate>::Sensor(const Sensor &other) : name(other.name), value(other.value)
+Sensor<SensorTemplate>::Sensor(const Sensor &other) : name(other.name), value(other.value), sensorLog(other.sensorLog)
 {
-    std::cout << "[Sensor] " << name << " has been copied to Sensor " << other.name << std::endl;
+    if (other.sensorLog)
+    {
+        cout << "[Sensor] " << name << " has been copied to Sensor " << other.name << endl;
+    }
 }
-
 // Setter constructor
 template <typename SensorTemplate>
-Sensor<SensorTemplate>::Sensor(std::string name, SensorTemplate value) : name(name), value(value)
+Sensor<SensorTemplate>::Sensor(string name, SensorTemplate value, bool boolSensorLog) : name(name), value(value), sensorLog(boolSensorLog)
 {
-    std::cout << "[Sensor] " << name << " created" << std::endl;
+    if (sensorLog)
+    {
+        cout << "[Sensor] " << name << " created" << endl;
+    }
 }
 
 // Copy assignment operator
 template <typename SensorTemplate>
 Sensor<SensorTemplate> &Sensor<SensorTemplate>::operator=(const Sensor &other)
 {
-    std::cout << "[Sensor] " << name << " has been assigned to Sensor " << other.name << std::endl;
+    if (sensorLog)
+    {
+        cout << "[Sensor] " << name << " has been assigned to Sensor " << other.name << endl;
+    }
     if (this != &other)
     {
         name = other.name;
@@ -66,12 +78,15 @@ Sensor<SensorTemplate> &Sensor<SensorTemplate>::operator=(const Sensor &other)
 template <typename SensorTemplate>
 Sensor<SensorTemplate>::~Sensor()
 {
-    std::cout << "[Sensor] " + this->name + " destroyed" << std::endl;
+    if (sensorLog)
+    {
+        cout << "[Sensor] " + this->name + " destroyed" << endl;
+    }
 }
 
 // Getters
 template <typename SensorTemplate>
-std::string Sensor<SensorTemplate>::getName() const
+string Sensor<SensorTemplate>::getName() const
 {
     return name;
 }
@@ -79,37 +94,80 @@ template <typename SensorTemplate>
 SensorTemplate Sensor<SensorTemplate>::getValue() const
 {
     return value;
+
 }
 
 // Generate random value based on sensor type
 template <typename SensorTemplate>
 SensorTemplate Sensor<SensorTemplate>::aleaGenVal()
-{
-    if (std::is_same<SensorTemplate, int>::value)
+{   
+    random_device rand;
+    mt19937 gen(rand());
+    
+    if (is_same<SensorTemplate, int>::value)
     {
-        value = rand() % 100;
-        
+        uniform_int_distribution<int> dist(15, 40);
+        value = dist(gen);
     }
-    else if (std::is_same<SensorTemplate, float>::value)
+    else if (is_same<SensorTemplate, float>::value)
     {
-        value = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        uniform_real_distribution<float> dist(40, 110.0);
+        value = dist(gen);
     }
-    else if (std::is_same<SensorTemplate, double>::value)
+    else if (is_same<SensorTemplate, double>::value)
     {
-        value = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
+        uniform_real_distribution<double> dist(200.0, 3000.0);
+        value = dist(gen);
     }
-    else if (std::is_same<SensorTemplate, bool>::value)
+    else if (is_same<SensorTemplate, bool>::value)
     {
-        value = rand() % 2;
+        uniform_int_distribution<int> dist(0, 1);
+        value = dist(gen);
     }
-    else     
+    else
     {
         // Unsupported sensor type
-        throw std::invalid_argument("Unsupported sensor type");
+        throw invalid_argument("Unsupported sensor type");
     }
-    std::cout << "[Sensor] " << name << " value is " << value << std::endl;
+    if (sensorLog)
+    {
+        cout << "[Sensor] " << name << " value is " << value << endl;
+    }
     return value;
 }
+
+class SensorInt : public Sensor<int>
+{
+    public:
+        SensorInt() : Sensor<int>() {}
+        SensorInt(const SensorInt &other) : Sensor<int>(other) {}
+        SensorInt(string name, int value, bool boolSensorLog) : Sensor<int>(name, value, boolSensorLog) {}
+};
+
+class SensorFloat : public Sensor<float>
+{
+    public:
+        SensorFloat() : Sensor<float>() {}
+        SensorFloat(const SensorFloat &other) : Sensor<float>(other) {}
+        SensorFloat(string name, float value, bool boolSensorLog) : Sensor<float>(name, value, boolSensorLog) {}
+};
+
+class SensorDouble : public Sensor<double>
+{
+    public:
+        SensorDouble() : Sensor<double>() {}
+        SensorDouble(const SensorDouble &other) : Sensor<double>(other) {}
+        SensorDouble(string name, double value, bool boolSensorLog) : Sensor<double>(name, value, boolSensorLog) {}
+};
+
+class SensorBool : public Sensor<bool>
+{
+    public:
+        SensorBool() : Sensor<bool>() {}
+        SensorBool(const SensorBool &other) : Sensor<bool>(other) {}
+        SensorBool(string name, bool value, bool boolSensorLog) : Sensor<bool>(name, value, boolSensorLog) {}
+};
+
 
 
 #endif
