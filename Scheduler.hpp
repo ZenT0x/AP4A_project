@@ -1,7 +1,10 @@
 #pragma once
 
 class Scheduler
-{
+{   
+    private:
+        bool sensorLog;
+        bool serverLog;
     public:
-    Scheduler();
-};
+        Scheduler(bool mainLog, bool serverLog, bool sensorLog);
+};   

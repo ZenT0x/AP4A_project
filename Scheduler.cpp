@@ -3,37 +3,21 @@
 #include "Sensor.hpp"
 #include <iostream>
 
+using namespace std;
 
-Scheduler::Scheduler()
+Scheduler::Scheduler(bool mainLog, bool serverLog, bool sensorLog)
 {
-    std::cout << "[Scheduler] Scheduler created" << std::endl;
+    if (mainLog)
+    {
+        cout << endl;
+        cout << "Program started" << endl;
+        cout << endl;
+        cout << "[Scheduler] Scheduler created" << endl;
+    }
+
+    SensorInt Temperature("Temperature", 0, sensorLog);
+    SensorInt Humidity("Humidity", 0, serverLog);
+    SensorFloat Sound("Sound", 0, serverLog);
+    SensorDouble Light("Light", 0, serverLog);
     
-    Server<std::string> stringServer;
-    Server<int> intServer;
-    Server<float> floatServer(true,true);
-
-    Server<int> testServer(true,true);
-
-    std::cout << std::endl;
-
-    Sensor<std::string> stringSensor("stringSensor", "Hello World!");
-    Sensor<int> Temperature("Temperature", 25);
-    Sensor<float> Pressure("Pressure", 1.2);
-    Sensor<float> Humidity("Humidity", 0.5);
-
-    std::cout << std::endl;
-
-    stringServer << stringSensor;
-    intServer << Temperature;
-    floatServer << Pressure;
-    floatServer << Humidity;
-
-    std::cout << std::endl;
-
-    Temperature.aleaGenVal();
-    Pressure.aleaGenVal();
-    Humidity.aleaGenVal();
-
-    std::cout << std::endl;
 }
-
