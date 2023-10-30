@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
         
     }
     Scheduler scheduler(MainLog, SensorLog, ServerLog);
+    scheduler.run();
     return 0;
 }
 
