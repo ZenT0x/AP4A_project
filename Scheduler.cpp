@@ -37,7 +37,7 @@ Scheduler::Scheduler(bool mainLog, bool serverLog, bool sensorLog)
     
 }
 
-// Overload function to receive data from sensor
+// TODO : Overload function to receive data from sensor
 template <typename SensorTemplate>
 void Scheduler::receiveData(<SensorTemplate>& server, <SensorTemplate>& sensor)
 {
