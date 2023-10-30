@@ -37,8 +37,9 @@ Scheduler::Scheduler(bool mainLog, bool serverLog, bool sensorLog)
     
 }
 
+// Overload function to receive data from sensor
 template <typename SensorTemplate>
-void Scheduler::receiveData(SensorTemplate& server, SensorTemplate& sensor)
+void Scheduler::receiveData(<SensorTemplate>& server, <SensorTemplate>& sensor)
 {
     // With thread, server will get the value of sensor every 5 seconds
     thread([this, &server, &sensor]() {
@@ -60,8 +61,6 @@ void Scheduler::run()
     ServerInt serverInt(serverLog);
     ServerFloat serverFloat(serverLog);
     ServerDouble serverDouble(serverLog);
-
-    receiveData(serverInt, Temperature);
 }
 
     
