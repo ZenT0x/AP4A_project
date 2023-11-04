@@ -28,7 +28,7 @@ public:
 
 // Default constructor
 template <typename SensorTemplate>
-Sensor<SensorTemplate>::Sensor() : name("Sensor" + to_string(sensorCount)), sensorLog(false), value(0)
+Sensor<SensorTemplate>::Sensor() : name("Sensor"), sensorLog(false), value(0)
 {
 
 }

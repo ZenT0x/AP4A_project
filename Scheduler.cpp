@@ -2,8 +2,7 @@
 #include "Server.hpp"
 #include "Sensor.hpp"
 #include <iostream>
-#include <thread>
-#include <chrono>
+#include <conio.h>
 
 using namespace std;
 
@@ -31,24 +30,21 @@ Scheduler::Scheduler(bool mainLog, bool serverLog, bool sensorLog)
     }
 
     Server server1(serverLog);
-    server1 << Temperature;
+
+    receiveData(server1, Temperature);
+
+    while (true) {
+        // Code to execute at each iteration of the loop
+        // Display a message to the console
+        std::cout << "Appuie sur Entree pour sortir..." << std::endl;
+        
+        // Check if the user has pressed Enter
+        if (std::cin.get() == 'q') {
+            break;  // Quit the loop if Enter is pressed
+        }
+    }
 
 }
-/*
-// TODO : Overload function to receive data from sensor
-template <typename SensorTemplate>
-void Scheduler::receiveData(<SensorTemplate>& server, <SensorTemplate>& sensor)
-{
-    // With thread, server will get the value of sensor every 5 seconds
-    thread([this, &server, &sensor]() {
-        while (true)
-        {
-            server << sensor;
-            this_thread::sleep_for(chrono::seconds(1));
-        }
-    }).detach();
-}
-*/
 
 void Scheduler::run()
 {   
