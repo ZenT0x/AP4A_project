@@ -8,10 +8,6 @@ class Scheduler
     private:
         bool sensorLog;
         bool serverLog;
-        SensorInt Temperature;
-        SensorInt Humidity;
-        SensorFloat Sound;
-        SensorDouble Light;
 
     public:
         Scheduler(bool mainLog, bool serverLog, bool sensorLog);

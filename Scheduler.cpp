@@ -30,13 +30,11 @@ Scheduler::Scheduler(bool mainLog, bool serverLog, bool sensorLog)
         cout << "[Scheduler] Creating servers" << endl;
     }
 
-    ServerInt serverInt(serverLog);
-    ServerFloat serverFloat(serverLog);
-    ServerDouble serverDouble(serverLog);
-    
-    
+    Server server1(serverLog);
+    server1 << Temperature;
+     
 }
-
+/*
 // TODO : Overload function to receive data from sensor
 template <typename SensorTemplate>
 void Scheduler::receiveData(<SensorTemplate>& server, <SensorTemplate>& sensor)
@@ -50,17 +48,11 @@ void Scheduler::receiveData(<SensorTemplate>& server, <SensorTemplate>& sensor)
         }
     }).detach();
 }
+*/
 
 void Scheduler::run()
 {   
-    SensorInt Temperature("Temperature", 0, sensorLog);
-    SensorInt Humidity("Humidity", 0, serverLog);
-    SensorFloat Sound("Sound", 0, serverLog);
-    SensorDouble Light("Light", 0, serverLog);
-
-    ServerInt serverInt(serverLog);
-    ServerFloat serverFloat(serverLog);
-    ServerDouble serverDouble(serverLog);
+    
 }
 
     

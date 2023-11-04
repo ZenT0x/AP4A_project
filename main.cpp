@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
     bool ServerLog = false;
     bool SensorLog = false;
     
-    srand(time(NULL));
 
     if (argc > 1)
     {   

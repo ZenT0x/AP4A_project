@@ -11,12 +11,12 @@ template <typename SensorTemplate>
 class Sensor
 {
 private:
-    static int sensorCount;
     string name;
     bool sensorLog;
     SensorTemplate value;
 
 public:
+    static int sensorCount;
     Sensor();
     Sensor(const Sensor &other);
     Sensor(string name, SensorTemplate value, bool boolSensorLog);
