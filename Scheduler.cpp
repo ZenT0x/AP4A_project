@@ -32,7 +32,7 @@ Scheduler::Scheduler(bool mainLog, bool serverLog, bool sensorLog)
 
     Server server1(serverLog);
     server1 << Temperature;
-     
+
 }
 /*
 // TODO : Overload function to receive data from sensor

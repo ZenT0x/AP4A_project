@@ -33,7 +33,7 @@ Server &Server::operator<<(const Sensor<SensorTemplate> &other)
 {
     if (serverLog)
     {
-        cout << "[Server] " << name << " received " << other.getName() << " : " << other.getValue() << endl;
+        cout << "[Server] received " << other.getName() << " : " << other.getValue() << endl;
     }
     stringstream ss;
     ss << other.getValue();

@@ -16,7 +16,6 @@ private:
     SensorTemplate value;
 
 public:
-    static int sensorCount;
     Sensor();
     Sensor(const Sensor &other);
     Sensor(string name, SensorTemplate value, bool boolSensorLog);
@@ -27,22 +26,18 @@ public:
     SensorTemplate aleaGenVal();
 };
 
-// Initialize static variable
-template <typename SensorTemplate>
-int Sensor<SensorTemplate>::sensorCount = 0;
-
 // Default constructor
 template <typename SensorTemplate>
 Sensor<SensorTemplate>::Sensor() : name("Sensor" + to_string(sensorCount)), sensorLog(false), value(0)
 {
-    sensorCount++;   
+
 }
 
 
 // Copy constructor
 template <typename SensorTemplate>
 Sensor<SensorTemplate>::Sensor(const Sensor &other) : name(other.name), value(other.value), sensorLog(other.sensorLog)
-{
+{   
     if (other.sensorLog)
     {
         cout << "[Sensor] " << name << " has been copied to Sensor " << other.name << endl;
@@ -51,7 +46,7 @@ Sensor<SensorTemplate>::Sensor(const Sensor &other) : name(other.name), value(ot
 // Setter constructor
 template <typename SensorTemplate>
 Sensor<SensorTemplate>::Sensor(string name, SensorTemplate value, bool boolSensorLog) : name(name), value(value), sensorLog(boolSensorLog)
-{
+{   
     if (sensorLog)
     {
         cout << "[Sensor] " << name << " created" << endl;
@@ -90,6 +85,7 @@ string Sensor<SensorTemplate>::getName() const
 {
     return name;
 }
+
 template <typename SensorTemplate>
 SensorTemplate Sensor<SensorTemplate>::getValue() const
 {
