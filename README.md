@@ -6,8 +6,7 @@ This project is an IOT ecosystem simulator specialized in monitoring the air qua
 
 ### Introduction
 
-The AP4A project takes the form of an individual mini-project aimed at putting into practice the knowledge acquired during the course. This project also serves as a preview of the Java project and its expectations, which must be submitted at the end of the semester. Three sessions of three hours each are allocated for the completion of the project, with increasing complexity.
-
+The AP4A project takes the form of an individual mini-project aimed at putting into practice the knowledge acquired during the course. This project also serves as a preview of the Java project and its expectations.
 ### Context
 
 The project involves creating a simulator to model an IOT ecosystem specialized in monitoring the air quality of workspaces. This ecosystem includes a server communicating with various types of sensors distributed in the workspace, such as a temperature sensor, a humidity sensor, a light sensor, and a sound sensor. The information collected by these sensors can be stored as log files or shared in a console for later visualization.
