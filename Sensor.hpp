@@ -25,9 +25,13 @@ template <typename SensorTemplate>
 class Sensor
 {
 private:
-    string name; ///< The name of the sensor.
-    bool sensorLog; ///< Flag indicating whether to log sensor messages.
+
     SensorTemplate value; ///< The current value of the sensor.
+
+protected:
+    bool sensorLog; ///< Flag indicating whether to log sensor messages.
+    string name; ///< The name of the sensor.
+
 
 public:
     /**
@@ -72,7 +76,7 @@ public:
      *
      * Destroys the sensor.
      */
-    ~Sensor();
+    virtual ~Sensor();
 
     /**
      * @brief Gets the name of the sensor.
@@ -272,6 +276,18 @@ public:
      * @param boolSensorLog Flag indicating whether to log sensor messages.
      */
     SensorInt(string name, int value, bool boolSensorLog) : Sensor<int>(name, value, boolSensorLog) {}
+    /**
+     * @brief Destructor.
+     *
+     * Destroys the SensorInt object. If the sensorLog flag is true, a message is printed to the console.
+     */
+    SensorInt::~SensorInt()
+    {
+        if (sensorLog)
+        {
+            cout << "[SensorInt] Sensor " << name << " destroyed" << endl;
+        }
+    }
 };
 
 
@@ -310,6 +326,18 @@ public:
      * @param boolSensorLog Flag indicating whether to log sensor messages.
      */
     SensorFloat(string name, float value, bool boolSensorLog) : Sensor<float>(name, value, boolSensorLog) {}
+    /**
+     * @brief Destructor.
+     *
+     * Destroys the SensorFloat object. If the sensorLog flag is true, a message is printed to the console.
+     */
+    SensorFloat::~SensorFloat()
+    {
+        if (sensorLog)
+        {
+            cout << "[SensorFloat] Sensor " << name << " destroyed" << endl;
+        }
+    }
 };
 
 /**
@@ -347,6 +375,18 @@ public:
      * @param boolSensorLog Flag indicating whether to log sensor messages.
      */
     SensorBool(string name, bool value, bool boolSensorLog) : Sensor<bool>(name, value, boolSensorLog) {}
+    /**
+     * @brief Destructor.
+     *
+     * Destroys the SensorBool object. If the sensorLog flag is true, a message is printed to the console.
+     */
+    SensorBool::~SensorBool()
+    {
+        if (sensorLog)
+        {
+            cout << "[SensorBool] Sensor " << name << " destroyed" << endl;
+        }
+    }
 };
 
 #endif
