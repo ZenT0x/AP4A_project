@@ -23,26 +23,25 @@ using namespace std;
  */
 int main(int argc, char *argv[])
 {
-    bool MainLog = false;
-    bool ServerLog = false;
-    bool SensorLog = false;
-
-    if (argc > 1)
-    {   
-        if (string(argv[1]) == "1")
-        {
-            MainLog = true;
-        }
-        if (string(argv[2]) == "1")
-        {
-            ServerLog = true;
-        }
-        if (string(argv[3]) == "1")
-        {
-           SensorLog = true;
-        }
-        
+    if (argc != 4)
+    {
+        std::cerr << "Error: Exactly three arguments that are either '0' or '1' must be provided.\n";
+        return -1;
     }
+
+    for (int i = 1; i < argc; i++)
+    {
+        if (std::string(argv[i]) != "0" && std::string(argv[i]) != "1")
+        {
+            std::cerr << "Error: Arguments must be either '0' or '1'.\n";
+            return -1;
+        }
+    }
+
+    bool MainLog = std::string(argv[1]) == "1";
+    bool ServerLog = std::string(argv[2]) == "1";
+    bool SensorLog = std::string(argv[3]) == "1";
+
     Scheduler scheduler(MainLog, SensorLog, ServerLog);
     return 0;
 }
