@@ -281,7 +281,7 @@ public:
      *
      * Destroys the SensorInt object. If the sensorLog flag is true, a message is printed to the console.
      */
-    SensorInt::~SensorInt()
+    ~SensorInt()
     {
         if (sensorLog)
         {
@@ -331,7 +331,7 @@ public:
      *
      * Destroys the SensorFloat object. If the sensorLog flag is true, a message is printed to the console.
      */
-    SensorFloat::~SensorFloat()
+    ~SensorFloat()
     {
         if (sensorLog)
         {
@@ -380,7 +380,7 @@ public:
      *
      * Destroys the SensorBool object. If the sensorLog flag is true, a message is printed to the console.
      */
-    SensorBool::~SensorBool()
+    ~SensorBool()
     {
         if (sensorLog)
         {
