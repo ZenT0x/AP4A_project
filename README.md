@@ -21,7 +21,7 @@ The project involves creating a simulator to model an IOT ecosystem specialized 
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/ZenT0x/AP4A_project.git`
-2. Navigate to the project directory: `cd your_project`
+2. Navigate to the project directory: `AP4A_project`
 3. Compile the project: `g++ -o main *.cpp`
 4. Run the main program: `./main 0|1 0|1 0|1` (Enable Mainlogs, serverslogs, and sensorslogs)
 
