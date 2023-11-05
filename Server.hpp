@@ -29,6 +29,25 @@ private:
      * @brief Flag indicating whether to log server messages.
      */
     bool serverLog;
+    /**
+     * @brief Writes a message to the console.
+     *
+     * If the serverLog flag is true, the given message is printed to the console.
+     *
+     * @param message The message to write to the console.
+     */
+    void consoleWrite(string message);
+
+    /**
+     * @brief Writes sensor data to a file.
+     *
+     * If the serverLog flag is true, the sensor data is written to a file.
+     *
+     * @param sensorName The name of the sensor.
+     * @param sensorValue The value of the sensor.
+     */
+    template <typename SensorTemplate>
+    void fileWrite(string sensorName, SensorTemplate sensorValue);
 
 public:
     /**
@@ -83,26 +102,6 @@ public:
      * Destroys the server.
      */
     ~Server();
-
-    /**
-     * @brief Writes a message to the console.
-     *
-     * If the serverLog flag is true, the given message is printed to the console.
-     *
-     * @param message The message to write to the console.
-     */
-    void consoleWrite(string message);
-
-    /**
-     * @brief Writes sensor data to a file.
-     *
-     * If the serverLog flag is true, the sensor data is written to a file.
-     *
-     * @param sensorName The name of the sensor.
-     * @param sensorValue The value of the sensor.
-     */
-    template <typename SensorTemplate>
-    void fileWrite(string sensorName, SensorTemplate sensorValue);
 };
 
 /**
